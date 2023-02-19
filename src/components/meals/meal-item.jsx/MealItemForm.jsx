@@ -3,9 +3,11 @@ import Button from "../../UI/Button";
 import { ReactComponent as PlusIcon } from "../../../assets/icons/plus.svg";
 import { useContext, useState } from "react";
 import { BasketContext } from "../../../store/BasketContext";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "../../../store/basket/basketReducer";
 
 const MealItemForm = ({ id, title, price }) => {
-  const { addToBasket } = useContext(BasketContext);
+const dispatch = useDispatch()
 
   const [amount, setAmount] = useState(1);
 
@@ -21,7 +23,9 @@ const MealItemForm = ({ id, title, price }) => {
       title,
       amount,
     };
-    addToBasket(basketitem);
+    ;
+    dispatch(addToBasket(basketitem))
+    
   };
 
   return (

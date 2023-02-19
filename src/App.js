@@ -1,13 +1,15 @@
 import React, { useCallback, useState } from "react";
+import { Provider } from "react-redux";
 import styled from "styled-components";
 import "./App.css";
 import Basket from "./components/basket/Basket";
 import Header from "./components/header/Header";
 import Meals from "./components/meals/Meals";
 import Summary from "./components/summary/Summary";
+import { store } from "./store";
 import { BasketProvider } from "./store/BasketContext";
 
-const App = () => {
+const AppContent = () => {
   const [isBasketVisible, setBasketVisible] = useState(false);
 
   const showBasketHandler = useCallback(() => {
@@ -15,16 +17,24 @@ const App = () => {
   }, []);
 
   return (
-    <BasketProvider>
+    <>
       <Header onShowBasket={showBasketHandler} />
       <Content>
         <Summary />
         <Meals />
         {isBasketVisible && <Basket onClose={showBasketHandler} />}
       </Content>
-    </BasketProvider>
+    </>
   );
 };
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <AppContent/>
+    </Provider>
+  )
+}
 
 export default App;
 
