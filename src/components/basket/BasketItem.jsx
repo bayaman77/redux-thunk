@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../UI/Button";
 
-const BasketItem = ({ title, price, amount, increment, decrement }) => {
-
+const BasketItem = ({ title, price, amount, increment, decrement, error }) => {
   return (
     <Container>
+      <span style={{ color: "red" }}>{error}</span>
       <Title>{title}</Title>
       <Content>
         <PriceAndAmountContainer>
@@ -13,18 +13,10 @@ const BasketItem = ({ title, price, amount, increment, decrement }) => {
           <Amount>X{amount}</Amount>
         </PriceAndAmountContainer>
         <CounterContainer>
-          <Button
-            borderStyle="sqaured"
-            variant="outlined"
-            onClick={decrement}
-          >
+          <Button borderStyle="sqaured" variant="outlined" onClick={decrement}>
             -
           </Button>
-          <Button
-            borderStyle="sqaured"
-            variant="outlined"
-            onClick={increment}
-          >
+          <Button borderStyle="sqaured" variant="outlined" onClick={increment}>
             +
           </Button>
         </CounterContainer>

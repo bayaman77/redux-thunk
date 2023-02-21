@@ -1,19 +1,18 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { fetchAPI } from "../../lib/fetchApi";
-import { getMeals, mealsActionTypes } from "../../store/meals/mealsReducer";
+import { getMeals } from "../../store/meals/mealsSlice";
 import MealItem from "./meal-item.jsx/MealItem";
 
 const Meals = () => {
   const dispatch = useDispatch();
 
-  const { meals, isLoading, error } = useSelector((state) => state.meals);
+  const { meals = [], isLoading, error } = useSelector((state) => state.meals);
 
 
   useEffect(() => {
     dispatch(getMeals())
-  }, []);
+  }, [dispatch]);
 
   return (
     <Card>

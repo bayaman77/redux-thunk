@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import Button from "../../UI/Button";
 import { ReactComponent as PlusIcon } from "../../../assets/icons/plus.svg";
-import { useContext, useState } from "react";
-import { BasketContext } from "../../../store/BasketContext";
-import { useDispatch } from "react-redux";
-import { addToBasket } from "../../../store/basket/basketReducer";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToBasket } from "../../../store/basket/basketSlice";
 
 const MealItemForm = ({ id, title, price }) => {
 const dispatch = useDispatch()
+const {error} = useSelector(state => state.basket)
 
   const [amount, setAmount] = useState(1);
 
@@ -46,6 +46,7 @@ const dispatch = useDispatch()
         <StyledIcon />
         Add
       </Button>
+      <span style={{color: 'red'}}>{error}</span>
     </StyledForm>
   );
 };

@@ -7,7 +7,6 @@ import Header from "./components/header/Header";
 import Meals from "./components/meals/Meals";
 import Summary from "./components/summary/Summary";
 import { store } from "./store";
-import { BasketProvider } from "./store/BasketContext";
 
 const AppContent = () => {
   const [isBasketVisible, setBasketVisible] = useState(false);
