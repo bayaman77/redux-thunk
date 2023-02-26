@@ -37,7 +37,7 @@ const StyledButton = styled.button`
   line-height: 24px;
   color: ${getColor};
   margin: 0;
-  border: 1px solid rgb(126, 42, 10);
+  border: 1px solid #7e2a0a;
   padding: 10px 32px;
   cursor: pointer;
   &:hover {

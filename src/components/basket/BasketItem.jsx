@@ -1,6 +1,8 @@
+import { Button } from "@mui/material";
 import React from "react";
-import styled from "styled-components";
-import Button from "../UI/Button";
+import styledComponents from "styled-components";
+import { styled} from "@mui/system";
+
 
 const BasketItem = ({ title, price, amount, increment, decrement, error }) => {
   return (
@@ -13,12 +15,12 @@ const BasketItem = ({ title, price, amount, increment, decrement, error }) => {
           <Amount>X{amount}</Amount>
         </PriceAndAmountContainer>
         <CounterContainer>
-          <Button borderStyle="sqaured" variant="outlined" onClick={decrement}>
+          <StyledButton borderStyle="sqaured" variant="outlined" onClick={decrement}>
             -
-          </Button>
-          <Button borderStyle="sqaured" variant="outlined" onClick={increment}>
+          </StyledButton>
+          <StyledButton borderStyle="sqaured" variant="outlined" onClick={increment}>
             +
-          </Button>
+          </StyledButton>
         </CounterContainer>
       </Content>
     </Container>
@@ -27,12 +29,25 @@ const BasketItem = ({ title, price, amount, increment, decrement, error }) => {
 
 export default BasketItem;
 
-const Container = styled.div`
+const StyledButton = styled(Button)(()=>({
+  '&':{
+    padding: '10px 32px',
+    border: '1px solid #7e2a0a;',
+    color: '#7e2a0a'
+  },
+  '&:hover':{
+    border: '1px solid #7e2a0a;',
+    backgroundColor: '#7e2a0a',
+    color: "white",
+  }
+}))
+
+const Container = styledComponents.div`
   padding: 24px 0;
   width: 95%;
   border-bottom: 1px solid gray;
 `;
-const Title = styled.p`
+const Title = styledComponents.p`
   font-weight: 600;
   font-size: 20px;
   line-height: 30px;
@@ -40,14 +55,14 @@ const Title = styled.p`
   margin-bottom: 12px;
 `;
 
-const Price = styled.p`
+const Price = styledComponents.p`
   font-weight: 600;
   font-size: 18px;
   line-height: 27px;
   color: #ad5502;
 `;
 
-const Amount = styled.span`
+const Amount = styledComponents.span`
   border: 1px solid #d6d6d6;
   border-radius: 6px;
   font-weight: 500;
@@ -58,19 +73,19 @@ const Amount = styled.span`
   padding: 6px 14px;
 `;
 
-const PriceAndAmountContainer = styled.div`
+const PriceAndAmountContainer = styledComponents.div`
   width: 153px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
-const CounterContainer = styled.div`
+const CounterContainer = styledComponents.div`
   display: flex;
   gap: 14px;
 `;
 
-const Content = styled.div`
+const Content = styledComponents.div`
   display: flex;
   justify-content: space-between;
   align-items: center;

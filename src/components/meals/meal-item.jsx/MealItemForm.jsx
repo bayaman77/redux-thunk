@@ -1,13 +1,14 @@
-import styled from "styled-components";
-import Button from "../../UI/Button";
+import styledComponents from "styled-components";
+import {styled} from "@mui/system";
 import { ReactComponent as PlusIcon } from "../../../assets/icons/plus.svg";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToBasket } from "../../../store/basket/basketSlice";
+import { Button, TextField } from "@mui/material";
 
 const MealItemForm = ({ id, title, price }) => {
-const dispatch = useDispatch()
-const {error} = useSelector(state => state.basket)
+  const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.basket);
 
   const [amount, setAmount] = useState(1);
 
@@ -23,41 +24,65 @@ const {error} = useSelector(state => state.basket)
       title,
       amount,
     };
-    ;
-    dispatch(addToBasket(basketitem))
-    
+    dispatch(addToBasket(basketitem));
   };
 
   return (
-    <StyledForm onSubmit={submitHandler}>
+    <StyledForm>
       <Container>
         <label htmlFor={id}>Amount</label>
-        <input
+        <StyledTextField
           value={amount}
           onChange={amountChangeHandler}
           type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          size="small"
           id={id}
           min={1}
           max={5}
           defaultChecked={1}
         />
       </Container>
-      <Button>
+      <StyledButton variant="contained" onClick={submitHandler}>
         <StyledIcon />
         Add
-      </Button>
-      <span style={{color: 'red'}}>{error}</span>
+      </StyledButton>
+      <span style={{ color: "red" }}>{error}</span>
     </StyledForm>
   );
 };
 
 export default MealItemForm;
 
-const StyledIcon = styled(PlusIcon)`
+const StyledTextField = styled(TextField)(() => ({
+  '&': {
+    width: '60px',
+  },
+  '& .MuiOutlinedInput-input': {
+    height: '20px',
+    padding: '5px 10px',
+    fontSize: '20px'
+  }
+}))
+
+const StyledButton = styled(Button)(()=>({
+  '&': {
+    backgroundColor: '#7e2a0a',
+    borderRadius: '25px',
+    padding: '10px 32px'
+  },
+  '&:hover': {
+    backgroundColor: '#2c0d00'
+  }
+}))
+
+const StyledIcon = styledComponents(PlusIcon)`
   margin-right: 10px;
 `;
 
-const Container = styled.div`
+const Container = styledComponents.div`
   margin-bottom: 12px;
   label {
     font-weight: 600;
@@ -79,7 +104,7 @@ const Container = styled.div`
   }
 `;
 
-const StyledForm = styled.form`
+const StyledForm = styledComponents.form`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
