@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
 import { styled } from "@mui/system";
 import React from "react";
 import styledComponents from "styled-components";
@@ -16,30 +16,9 @@ const BasketButton = ({ count, ...rest }) => {
 
 export default BasketButton;
 
-// const Styled = styled.button`
-//   background: #5a1f08;
-//   border-radius: 30px;
-//   padding: 10px 32px;
-//   font-weight: 600;
-//   font-size: 16px;
-//   line-height: 24px;
-//   color: white;
-//   border: none;
-//   display: flex;
-//   align-items: center;
-//   &:hover {
-//     background-color: #2d1106;
-//     color: lightgray;
-//   }
-//   &:hover > #counter{
-//     background-color: #5e1e04;
-//     color: lightgray;
-//   }
-// `;
-
-const StyledButton = styled(Button)(()=>({
+const StyledButton = styled('button')(({theme})=>({
   '&':{
-    background: '#5a1f08',
+    background: theme.palette.primary.dark,
     borderRadius: '30px',
     padding: '10px 32px',
     fontWeight: '600',
@@ -52,11 +31,11 @@ const StyledButton = styled(Button)(()=>({
   },
 
   '&:hover': {
-    backgroundColor: '#2d1106',
+    backgroundColor: theme.palette.primary.dark,
     color: 'lightgray',
   },
   '&:hover > #counter':{
-    backgroundColor: '#5e1e04',
+    backgroundColor: theme.palette.primary.main,
     color: 'lightgray',
   }
 }))

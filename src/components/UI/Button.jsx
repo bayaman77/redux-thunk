@@ -31,7 +31,7 @@ const getBorderRadius = (props) => {
 
 const StyledButton = styled.button`
   background: ${getBackgroundColor};
-  border-radius: ${getBorderRadius};
+  border-radius: ${getBorderRadius};  
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;

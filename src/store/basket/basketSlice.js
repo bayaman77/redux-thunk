@@ -132,7 +132,7 @@ export const submitOrder = createAsyncThunk(
   "basket/submitOrder",
   async ({orderData}, { dispatch, rejectWithValue }) => {
     try {
-      const { data } = await fetch("https://jsonplaceholder.typicode.com/posts",{
+      await fetch("https://jsonplaceholder.typicode.com/posts",{
         method: 'POST',
         body: orderData
       });
