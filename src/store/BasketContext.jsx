@@ -1,66 +1,65 @@
-import { createContext, useEffect, useState } from "react";
-import { fetchAPI } from "../lib/fetchApi";
+/* eslint-disable react/jsx-no-constructed-context-values */
+import { createContext, useEffect, useState } from 'react'
+import { fetchAPI } from '../lib/fetchApi'
 
 export const BasketContext = createContext({
   item: [],
-});
+})
 
 export const BasketProvider = ({ children }) => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([])
 
   const getBasket = async () => {
     try {
-      const { data } = await fetchAPI("basket");
+      const { data } = await fetchAPI('basket')
 
-      setItems(data.items);
+      setItems(data.items)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   useEffect(() => {
-    getBasket();
-  }, []);
+    getBasket()
+  }, [])
 
   const addToBasket = async (newItem) => {
     try {
       const response = await fetchAPI(`foods/${newItem.id}/addToBasket`, {
-        method: "POST",
+        method: 'POST',
         body: { amount: newItem.amount },
-      });
+      })
 
-      setItems(response.data.items);
+      setItems(response.data.items)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   const updateBasketitem = async ({ id, amount }) => {
     try {
       const { data } = await fetchAPI(`basketitem/${id}/update`, {
-        method: "PUT",
+        method: 'PUT',
         body: { amount },
-      });
+      })
 
-      setItems(data.items);
+      setItems(data.items)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
 
   const deleteBasketitem = async (id) => {
     try {
       const { data } = await fetchAPI(`basketitem/${id}/delete`, {
-        method: "DELETE"
-      });
+        method: 'DELETE',
+      })
 
-      setItems(data.items);
+      setItems(data.items)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
-
-  
+  }
 
   // const increment = (id) => {
   //   setItems((prevState) => {
@@ -91,10 +90,10 @@ export const BasketProvider = ({ children }) => {
     items,
     addToBasket,
     updateBasketitem,
-    deleteBasketitem
-  };
+    deleteBasketitem,
+  }
 
   return (
     <BasketContext.Provider value={state}>{children}</BasketContext.Provider>
-  );
-};
+  )
+}

@@ -1,6 +1,7 @@
-import styled from "styled-components";
+/* eslint-disable no-underscore-dangle */
+import styled from 'styled-components'
 
-import MealItemForm from "./MealItemForm";
+import MealItemForm from './MealItemForm'
 
 const MealItem = ({ meal }) => {
   return (
@@ -10,16 +11,12 @@ const MealItem = ({ meal }) => {
         <p>{meal.description}</p>
         <span>${meal.price}</span>
       </StyledItemInfo>
-      <MealItemForm
-        id={meal._id}
-        title={meal.title}
-        price={meal.price}
-      />
+      <MealItemForm id={meal._id} title={meal.title} price={meal.price} />
     </Container>
-  );
-};
+  )
+}
 
-export default MealItem;
+export default MealItem
 
 const Container = styled.li`
   list-style: none;
@@ -32,7 +29,7 @@ const Container = styled.li`
     border: none;
     margin: 0;
   }
-`;
+`
 
 const StyledItemInfo = styled.div`
   margin-bottom: 20px;
@@ -51,7 +48,7 @@ const StyledItemInfo = styled.div`
     color: #ad5502;
     margin-top: 4px;
   }
-`;
+`
 
 const StyledTitle = styled.h4`
   font-weight: 600;
@@ -59,4 +56,4 @@ const StyledTitle = styled.h4`
   line-height: 27px;
   color: #222222;
   margin: 0;
-`;
+`

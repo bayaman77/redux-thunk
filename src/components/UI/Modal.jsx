@@ -1,11 +1,11 @@
-import React from "react";
-import { createPortal } from "react-dom";
+import React from 'react'
+import { createPortal } from 'react-dom'
 
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Backdrop = ({ onClose }) => {
-  return <StyledBackdrop onClick={onClose} />;
-};
+  return <StyledBackdrop onClick={onClose} />
+}
 
 const StyledBackdrop = styled.div`
   position: fixed;
@@ -15,25 +15,25 @@ const StyledBackdrop = styled.div`
   height: 100vh;
   z-index: 20;
   background-color: rgba(0, 0, 0, 0.749);
-`;
+`
 
 const Modal = ({ children, onClose }) => {
   return (
     <>
       {createPortal(
         <Backdrop onClose={onClose} />,
-        document.getElementById("backdrop")
+        document.getElementById('backdrop')
       )}
 
       {createPortal(
         <StyledModalContent onClose={onClose}>{children}</StyledModalContent>,
-        document.getElementById("modal")
+        document.getElementById('modal')
       )}
     </>
-  );
-};
+  )
+}
 
-export default Modal;
+export default Modal
 const StyledModalContent = styled.div`
   position: fixed;
   top: 20vh;
@@ -58,4 +58,4 @@ const StyledModalContent = styled.div`
       transform: translateY(0);
     }
   }
-`;
+`

@@ -1,65 +1,90 @@
-import { Button } from "@mui/material";
-import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styledComponents from "styled-components";
-import { styled } from "@mui/system";
-import { getBasket } from "../../store/basket/basketSlice";
-import { uiActions } from "../../store/ui/uiSlice";
-import BasketButton from "./BasketButton";
+import { Button } from '@mui/material'
+import React, { useCallback, useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import styledComponents from 'styled-components'
+import { styled } from '@mui/material/styles'
+
+import { uiActions } from '../../store/ui/ui.slice'
+import BasketButton from './BasketButton'
+import { getBasket } from '../../store/basket/basker.thunk'
+import { signOut } from '../../store/auth/auth.thunk'
 
 const Header = ({ onShowBasket }) => {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {items = []} = useSelector(state => state.basket)
-const themeMode = useSelector(state => state.ui.themeMode)
-  const [animationClass, setAnimationClass] = useState("");
+  const isAuthorized = useSelector((state) => state.auth.isAuthorized)
+  const { items = [] } = useSelector((state) => state.basket)
+  const themeMode = useSelector((state) => state.ui.themeMode)
+  const [animationClass, setAnimationClass] = useState('')
 
-useEffect(() => {
-  dispatch(getBasket())
-},[dispatch])
+  useEffect(() => {
+    dispatch(getBasket())
+  }, [dispatch])
 
   const calculateTotalAmount = useCallback(() => {
     const sum = items.reduce((s, item) => {
-      return s + item.amount;
-    }, 0);
-    return sum;
-  }, [items]);
+      return s + item.amount
+    }, 0)
+    return sum
+  }, [items])
 
   useEffect(() => {
-    setAnimationClass("bump");
+    setAnimationClass('bump')
 
     const id = setTimeout(() => {
-      setAnimationClass("");
-    }, 300);
+      setAnimationClass('')
+    }, 300)
 
     return () => {
-      clearTimeout(id);
-    };
-  }, [items]);
+      clearTimeout(id)
+    }
+  }, [items])
 
   const themeChangeHandler = () => {
     const theme = themeMode === 'light' ? 'dark' : 'light'
     dispatch(uiActions.changeTheme(theme))
   }
 
+  const signOutHandler = () => {
+    dispatch(signOut())
+    // navigate('signin')
+  }
+
   return (
     <Container>
-      <Logo>ReactMeals</Logo>
+      <Link to="/">
+        <Logo>ReactMeals</Logo>
+      </Link>
       <BasketButton
         className={animationClass}
         onClick={onShowBasket}
         count={calculateTotalAmount()}
       />
-      <Button onClick={themeChangeHandler} sx={{color: 'white'}}>
+      <Button
+        variant="contained"
+        onClick={themeChangeHandler}
+        sx={{ color: 'white', backgroundColor: '#d74910' }}
+      >
         {themeMode === 'light' ? 'Turn dark mode' : 'Turn light mode'}
       </Button>
+      {isAuthorized ? (
+        <Button variant="contained" onClick={signOutHandler}>
+          Sign Out
+        </Button>
+      ) : (
+        <Button variant="contained" onClick={() => navigate('signin')}>
+          Sign In
+        </Button>
+      )}
     </Container>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
 
-const Container = styled('div')(({theme})=>({
-  "&":{
+const Container = styled('div')(({ theme }) => ({
+  '&': {
     position: 'fixed',
     top: '0',
     zIndex: '1',
@@ -70,7 +95,7 @@ const Container = styled('div')(({theme})=>({
     justifyContent: 'space-between',
     alignContent: 'center',
     padding: '21px 120px',
-  }
+  },
 }))
 
 // const Containers = styled.div`
@@ -113,4 +138,4 @@ const Logo = styledComponents.p`
   font-size: 38px;
   line-height: 57px;
   color: #ffffff;
-`;
+`
